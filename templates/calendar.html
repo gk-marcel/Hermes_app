@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+        <!--Responsive-->
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		<!--jQUERY MIN.JS-->
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+		<!--BOOTSTRAP CSS-->
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>
+		<!--BOOTSTRAP MIN.JS-->
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js' integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS' crossorigin='anonymous'></script>
+		<!--MY CSS-->
+		<link rel='stylesheet' type='text/css' href='/static/calendar.css?v={{ range(1,10000) | random() }}'>
+        <!--My Fonts-->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Raleway:400,500' rel='stylesheet'>
+        <!--Google Icons-->
+        <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+	</head>
+	<body>
+		<header class='header'>
+            <div class='headerColumn'>
+                <div class='headerLogo'>
+                    <img class='headerIcon' src='/static/img/headerIcon.png'>
+                    <img class='headerFont' src='/static/img/headerFont.png'>
+                </div>
+                <div class='time'>
+                    <i class='material-icons blue'>schedule</i>
+                    <p id='current-hour'></p>
+                </div>
+                <a href='/' class='logOut'>
+                    <p class='username'>{{ username }}</p>
+                    <img class='logOut-icon' src='/static/img/logOut.png'>
+                </a>
+            </div>
+        </header>
+        <div class='table-margins'>
+            <table class='table-background'>
+                <tr class='day-row'>
+                    {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
+                        <th class='day-name'>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+                {% for fila in range(1,filaMax+1) %}
+                    <tr class='hour-row'>
+                    {% for columna in range(1, 6) %}
+                        <td class='hour-cell'>
+                            {% for classe in llistaClasses %}
+                                {% if columna == classe['dayNumber'] %}
+                                    {% if fila == classe['startRow']+1 %}
+                                        <div class="margin-space"></div>
+                                        <div class="{{ 'class start '+classe['color']+' btn-'+classe['id']|string }}">
+                                            <div class="place">{{ classe['classroom'] }}</div>
+                                            <div class="class-time-start">{{ classe['startHourString'] }}</div>
+                                            <h1 class="subject-title">{{ classe['name'] }}</h1>
+                                        </div>
+                                    {% elif fila > classe['startRow'] and not fila >= classe['endRow'] %}
+                                        <div class="{{ 'class mid '+classe['color']+' btn-'+classe['id']|string }}"></div>
+                                    {% elif fila == classe['endRow'] %}
+                                        <div class="{{ 'class end '+classe['color']+' btn-'+classe['id']|string }}">
+                                            <div class="class-time-end">{{ classe['endHourString'] }}</div>
+                                        </div>
+                                        <div class="margin-space"></div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class='shadow'>
+        </div>
+        {% for classe in llistaClasses %}
+            <div id="{{ 'pop-'+classe['id']|string }}" class="{{ 'detailed-box '+classe['color']+' pop-'+classe['id']|string }}">
+                <div class="detailed-header">
+                    <div class="detailed-place">{{ classe['classroom'] }}</div>
+                    <div class="detailed-time">{{ classe['startHourString']+ " - " + classe['endHourString'] }}</div>
+                    <i class="material-icons cross">clear</i>
+                </div>
+                <div class="detailed-name">{{ classe['name'] }}</div>
+                <div class="detailed-code"><p class="detailed-label">Codi</p>{{ classe['codi'] }}</div>
+                <div class="detailed-teacher"><p class="detailed-label">Professor/a</p>{{ classe['profe'] }}</div>
+                <div class="detailed-group"><p class="detailed-label">Grup</p>{{ classe['grup'] }}</div>
+                <div class="detailed-teacher-email">{{ classe['emailProfe'] }}</div>
+            </div>
+            <script>
+                $(function() {
+                    $("{{ '.btn-'+classe['id']|string }}").hover(function() {
+                        $("{{ '.btn-'+classe['id']|string+' h1' }}").addClass("hover-box");
+                    }, function(){
+                        $("{{ '.btn-'+classe['id']|string+' h1' }}").removeClass("hover-box");
+                    });
+                    $("{{ '.btn-'+classe['id']|string }}").click(function() {
+                        $("{{ '.pop-'+classe['id']|string }}").addClass("active-box");
+                        $(".shadow").addClass("active-shadow");
+                    });
+                });
+            </script>
+        {% endfor %}
+        <script>
+            $(".shadow").click(function() {
+                $(".detailed-box").removeClass("active-box");
+                $(".shadow").removeClass("active-shadow");
+            });
+            $(".cross").click(function() {
+                $(".detailed-box").removeClass("active-box");
+                $(".shadow").removeClass("active-shadow");
+            });
+            function updateClock() {
+                var now = new Date();
+                var hours = (now.getHours()).toString();
+                var minutes = (now.getMinutes()).toString();
+                if (hours.length < 2) {
+                    hours = '0' + hours;
+                    }
+                if (minutes.length < 2) {
+                    minutes = '0' + minutes;
+                    }
+                var time = hours + ':' + minutes;
+                document.getElementById('current-hour').innerHTML = time;
+                setTimeout(updateClock, 5000);
+            }
+            updateClock();
+        </script>
+	</body>
+</html> 

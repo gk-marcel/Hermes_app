@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+        <!--Responsive-->
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		<!--jQUERY MIN.JS-->
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+		<!--BOOTSTRAP CSS-->
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>
+		<!--BOOTSTRAP MIN.JS-->
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js' integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS' crossorigin='anonymous'></script>
+		<!--MY CSS-->
+		<link rel='stylesheet' type='text/css' href='/static/login.css?v={{ range(1,10000) | random() }}'>
+        <!--My Fonts-->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Raleway:400,500' rel='stylesheet'>
+	</head>
+	<body>
+        <div class='box'>
+            <img class='logo' src='/static/img/loginLogo.png'>
+            <form class='form' action='.' method='POST' name='form'>
+                <input type='username' class='form_field' name='username' placeholder='Username'/>
+                <input type='password' class='form_field' name='password' placeholder='Password'/>
+                <input class='login_button' type='submit' name='acceptar' value='LOG IN'>
+            </form>
+        </div>
+	</body>
+</html> 

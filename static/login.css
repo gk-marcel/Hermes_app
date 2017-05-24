@@ -1,0 +1,89 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    --blueColor: #0eaed9;
+    --animation_duration: 0.3s;
+    --easingBounce: cubic-bezier(0.68, -0.55, 0.265, 2.55);
+    --easingNormal: ease-in-out;
+}
+
+body {
+    margin: 0;
+    background-color: #e7eaf0;
+}
+
+.box {
+    width: 400px;
+    margin: 40px auto 0 auto;
+    padding: 20px;
+    display: block;
+}
+
+.logo {
+    margin: 0 auto 35px auto;
+    display: block;
+}
+
+.form_field {
+    display: block;
+    width: 80%;
+    margin: 15px auto;
+    background-color: #ffffff;
+    line-height: 45px;
+    padding-left: 25px;
+    color: #7b7b7b;
+    font-size: 1.2em;
+    border-radius: 25px;
+    border-style: none;
+    -webkit-transition: all var(--animation_duration) var(--easingNormal);
+    -moz-transition: all var(--animation_duration) var(--easingNormal);
+    transition: all var(--animation_duration) var(--easingNormal);
+}
+
+.form_field::-webkit-input-placeholder { color: #d1d1d1; }
+.form_field:-moz-placeholder { color: #d1d1d1; }
+.form_field::-moz-placeholder { color: #d1d1d1; }
+.form_field:-ms-input-placeholder { color: #d1d1d1; }
+
+.form_field:focus {
+    outline:none;
+    box-shadow: 0 0 6px var(--blueColor);
+}
+
+.login_button {
+    display: block;
+    width: 50%;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 25px;
+    color: white;
+    font-weight: 500;
+    font-size: 1.4em;
+    font-weight: 200;
+    background-color: var(--blueColor);
+    border-style: none;
+    -webkit-transition: all var(--animation_duration) var(--easingBounce);
+    -moz-transition: all var(--animation_duration) var(--easingBounce);
+    transition: all var(--animation_duration) var(--easingBounce);
+}
+
+.login_button:hover {
+    opacity: 0.7;
+    text-decoration: None;
+    width: 60%;
+    color: white;
+}
+
+@media screen and (max-width:400px) {
+    .box {
+        width: 100%;
+    }
+}
+@media screen and (max-height:400px) {
+    .box {
+        margin: 20px auto 0 auto;
+    }
+}
