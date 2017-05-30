@@ -52,13 +52,20 @@
                                         <div class="{{ 'class start '+classe['color']+' btn-'+classe['id']|string }}">
                                             <div class="place">{{ classe['classroom'] }}</div>
                                             <div class="class-time-start">{{ classe['startHourString'] }}</div>
-                                            <h1 class="subject-title">{{ classe['name'] }}</h1>
+                                            <div class="subject-extra">
+                                                <h1 class="subject-title">{{ classe['name'] }}</h1>
+                                                    {% if classe.get("extra") %}
+                                                        <p class="extra-info">{{ classe['extra'] }}</p>
+                                                    {% endif %}
+                                            </div>
                                         </div>
                                     {% elif fila > classe['startRow'] and not fila >= classe['endRow'] %}
                                         <div class="{{ 'class mid '+classe['color']+' btn-'+classe['id']|string }}"></div>
                                     {% elif fila == classe['endRow'] %}
                                         <div class="{{ 'class end '+classe['color']+' btn-'+classe['id']|string }}">
-                                            <div class="class-time-end">{{ classe['endHourString'] }}</div>
+                                            {% if (classe['endRow']-classe['startRow']) > 2 %}
+                                                <div class="class-time-end">{{ classe['endHourString'] }}</div>
+                                            {% endif %}
                                         </div>
                                         <div class="margin-space"></div>
                                     {% endif %}
@@ -74,23 +81,31 @@
         </div>
         {% for classe in llistaClasses %}
             <div id="{{ 'pop-'+classe['id']|string }}" class="{{ 'detailed-box '+classe['color']+' pop-'+classe['id']|string }}">
-                <div class="detailed-header">
-                    <div class="detailed-place">{{ classe['classroom'] }}</div>
-                    <div class="detailed-time">{{ classe['startHourString']+ " - " + classe['endHourString'] }}</div>
-                    <i class="material-icons cross">clear</i>
-                </div>
-                <div class="detailed-name">{{ classe['name'] }}</div>
-                <div class="detailed-code"><p class="detailed-label">Codi</p>{{ classe['codi'] }}</div>
-                <div class="detailed-teacher"><p class="detailed-label">Professor/a</p>{{ classe['profe'] }}</div>
-                <div class="detailed-group"><p class="detailed-label">Grup</p>{{ classe['grup'] }}</div>
-                <div class="detailed-teacher-email">{{ classe['emailProfe'] }}</div>
+                <div class="detailed-content">
+                    <div class="detailed-header">
+                        <p class="detailed-place">{{ classe['classroom'] }}</p>
+                        <p class="detailed-time">{{ classe['startHourString']+ " - " + classe['endHourString'] }}</p>
+                        <i class="material-icons cross">arrow_downward</i>
+                    </div>
+                    <div class="detailed-info">
+                        <p class="detailed-name">{{ classe['name'] }}</p>
+                        <p class="detailed-label">Codi</p>
+                        <p class="detailed-data">{{ classe['codi'] }}</p>
+                        <p class="detailed-label">Professor/a</p>
+                        <p class="detailed-data">{{ classe['profe'] }}</p>
+                        <p class="detailed-label">Grup</p>
+                        <p class="detailed-data">{{ classe['grup'] }}</p>
+                        <p class="detailed-label">E-mail</p>
+                        <p class="detailed-data">{{ classe['emailProfe'] }}</p>
+                    </div>
+                </div>       
             </div>
             <script>
                 $(function() {
                     $("{{ '.btn-'+classe['id']|string }}").hover(function() {
-                        $("{{ '.btn-'+classe['id']|string+' h1' }}").addClass("hover-box");
+                        $("{{ '.btn-'+classe['id']|string }}").addClass("hover-box");
                     }, function(){
-                        $("{{ '.btn-'+classe['id']|string+' h1' }}").removeClass("hover-box");
+                        $("{{ '.btn-'+classe['id']|string }}").removeClass("hover-box");
                     });
                     $("{{ '.btn-'+classe['id']|string }}").click(function() {
                         $("{{ '.pop-'+classe['id']|string }}").addClass("active-box");
@@ -125,4 +140,4 @@
             updateClock();
         </script>
 	</body>
-</html> 
+</html>

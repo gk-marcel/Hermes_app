@@ -57,6 +57,12 @@ def convertJSON(JSONfile):
                 #COLOR DE LA CLASSE
                 classe['color'] = diccionariColors[classe['name']]
                 
+                #EXTRA
+                try:
+                    classe['extra'] = sessio['extra']
+                except KeyError:
+                    pass
+                
                 #ALTRES
                 classe['classroom'] = sessio['classroom']
                 classe['grup'] = str(numeroGrup)
