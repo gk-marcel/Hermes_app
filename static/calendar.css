@@ -349,6 +349,9 @@ body {
     .detailed-content {
         width: 100%;
     }
+    .subject-title {
+        font-size: 0.8em;
+    }
 }
 
 @media screen and (max-width:450px) {
