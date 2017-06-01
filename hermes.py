@@ -38,6 +38,9 @@ def calendar(username):
                            llistaClasses=llistaClasses,
                            filaMax=filaMax)
 
+@hermes.route('/help')
+def help_page():
+    return render_template('help.html')
 
 
 #------APP INIT-----#

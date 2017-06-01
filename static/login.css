@@ -71,10 +71,29 @@ body {
 }
 
 .login_button:hover {
-    opacity: 0.7;
+    opacity: 0.6;
     text-decoration: None;
     width: 60%;
     color: white;
+}
+
+.need-help {
+    color: var(--blueColor);
+    font-weight: 600;
+    -webkit-transition: all var(--animation_duration) var(--easingNormal);
+    -moz-transition: all var(--animation_duration) var(--easingNormal);
+    transition: all var(--animation_duration) var(--easingNormal);
+    opacity: 1;
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.need-help:hover {
+    opacity: 0.6;
+    text-decoration: none;
+    color: var(--blueColor);
 }
 
 @media screen and (max-width:400px) {
