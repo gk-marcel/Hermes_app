@@ -60,6 +60,7 @@ body {
     line-height: 45px;
     border-radius: 25px;
     color: white;
+    letter-spacing: 1px;
     font-weight: 500;
     font-size: 1.4em;
     font-weight: 200;
@@ -68,6 +69,7 @@ body {
     -webkit-transition: all var(--animation_duration) var(--easingBounce);
     -moz-transition: all var(--animation_duration) var(--easingBounce);
     transition: all var(--animation_duration) var(--easingBounce);
+    will-change: auto;
 }
 
 .login_button:hover {

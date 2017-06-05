@@ -39,7 +39,7 @@
         <div class='table-margins'>
             <table class='table-background'>
                 <tr class='day-row'>
-                    {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
+                    {% for day in ['Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres'] %}
                         <th class='day-name'>{{ day }}</th>
                     {% endfor %}
                 </tr>
@@ -65,9 +65,7 @@
                                         <div class="{{ 'class mid '+classe['color']+' btn-'+classe['id']|string }}"></div>
                                     {% elif fila == classe['endRow'] %}
                                         <div class="{{ 'class end '+classe['color']+' btn-'+classe['id']|string }}">
-                                            {% if (classe['endRow']-classe['startRow']) > 2 %}
-                                                <div class="class-time-end">{{ classe['endHourString'] }}</div>
-                                            {% endif %}
+                                            <div class="class-time-end">{{ classe['endHourString'] }}</div>
                                         </div>
                                         <div class="margin-space"></div>
                                     {% endif %}

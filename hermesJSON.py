@@ -78,14 +78,3 @@ def convertJSON(JSONfile):
     llistaClasses = getRows(llistaClasses)
     #print llistaClasses
     return llistaClasses
-
-'''
-JSONfile = getJsonExample()
-    
-#Obtinc una llista de totes les classes i amb les seves caracteristiques
-llistaClasses = convertJSON(JSONfile)
-print llistaClasses
-
-#Calculate necessary timetable rows
-filesNecessaries = getNecessaryRows(llistaClasses)
-'''

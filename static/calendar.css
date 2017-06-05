@@ -120,18 +120,26 @@ body {
     height: 100%;
     overflow: scroll;
 }
-
+/*
+.day-row {
+    border-bottom: 1px solid #dbdbdb;
+}
+*/
 .day-name {
     text-align: center;
-    font-size: 1.1em;
-    line-height: 50px;
+    font-size: 1em;
+    line-height: 45px;
     color: #767676;
     width: 20%;
 }
 
 .hour-cell {
-    height: 40px;
+    height: 32px;
 }
+
+/*.hour-row:nth-child(2n-1) {
+    border-bottom: 1px dashed #d1d1d1;
+}*/
 
 .class {
     margin: 0 4%;
@@ -182,7 +190,7 @@ body {
 
 .place {
     font-size: 0.8em;
-    top: 15px;
+    top: 10px;
     left: 7%;
     position: absolute;
 }
@@ -190,14 +198,14 @@ body {
 .class-time-start {
     font-size: 0.8em;
     right: 7%;
-    top: 15px;
+    top: 10px;
     position: absolute;
 }
 
 .subject-extra {
     position: absolute;
-    width: 90%;
-    top: 90%;
+    width: 60%;
+    top: 26px;
     left: 7%;
     -webkit-transition: all 0.2s var(--easingNormal);
     -moz-transition: all 0.2s var(--easingNormal);
@@ -205,15 +213,16 @@ body {
 }
 
 .subject-title {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-family: Raleway;
     font-weight: 400;
-    word-wrap: break-word;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .extra-info {
-    margin-top: 2%;
+    opacity: 0.7;
 }
 
 .hover-box .subject-extra {
@@ -226,8 +235,9 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 0 7% 7% 0;
+    margin: 0 7% 9px 0;
     overflow: visible;
+    z-index: 1;
 }
 
 .shadow {
@@ -242,6 +252,7 @@ body {
     transition: all var(--animation_duration) var(--easingNormal);
     visibility: hidden;
     z-index: 2;
+    will-change: opacity;
 }
 
 .active-shadow {
@@ -252,21 +263,22 @@ body {
 .detailed-box {
     position: fixed;
     width: 100%;
-    bottom: -150px;
+    bottom: 0;
     box-shadow: 0 0 1.6em rgba(0,0,0,0.5);
     color: white;
-    -webkit-transition: all var(--animation_duration) var(--easingNormal);
-    -moz-transition: all var(--animation_duration) var(--easingNormal);
-    transition: all var(--animation_duration) var(--easingNormal);
+    -webkit-transition: all var(--animation_duration) ease-in;
+    -moz-transition: all var(--animation_duration) ease-in;
+    transition: all var(--animation_duration) ease-in;
     visibility: hidden;
-    opacity: 0;
     z-index: 3;
+    transform: translate(0,100%);
+    will-change: transform;
 }
 
 .active-box {
     visibility: visible;
-    opacity: 1;
-    bottom: 0;
+    transform: translate(0,0);
+    transition-timing-function: ease-out;
 }
 
 .detailed-content {
@@ -337,6 +349,15 @@ body {
         border-radius: 0px;
         margin: 0 auto;
     }
+    .subject-title {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .subject-title {
+        font-size: 1em;
+    }
 }
 
 @media screen and (max-width:560px) {
@@ -350,6 +371,9 @@ body {
         width: 100%;
     }
     .subject-title {
+        font-size: 0.8em;
+    }
+    .extra-info {
         font-size: 0.8em;
     }
 }
