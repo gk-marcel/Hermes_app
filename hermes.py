@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 import hermesJSON
 
-#CREATE HERMES INSTANCE
+#App instance creation
 hermes = Flask(__name__)
 
 
@@ -43,6 +43,6 @@ def help_page():
     return render_template('help.html')
 
 
-#------APP INIT-----#
+#INIT
 if __name__=='__main__':
     hermes.run(debug=True)
