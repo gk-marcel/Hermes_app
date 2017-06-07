@@ -112,7 +112,7 @@
           {
             "day": "wednesday",
             "startHour": "08:00:00",
-            "endHour": "09:00:00",
+            "endHour": "09:45:00",
             "classroom": "B-B.4"
           }
         ]
@@ -132,7 +132,7 @@
           {
             "day": "friday",
             "startHour": "08:00:00",
-            "endHour": "11:00:00",
+            "endHour": "11:37:00",
             "classroom": "H-5.1",
             "extra": "(S.Senar)"
           }

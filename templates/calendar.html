@@ -43,49 +43,41 @@
                         <th class='day-name'>{{ day }}</th>
                     {% endfor %}
                 </tr>
-                {% for fila in range(1,filaMax+1) %}
-                    <tr class='hour-row'>
-                    {% for columna in range(1, 6) %}
-                        <td class='hour-cell'>
+                <tr class='table-body' style="height:{{alturaFiles*filaMax}}px;">
+                    {% for i in range(1,6) %}
+                        <td class="day-column">
+                            {% for j in range(0,filaMax) %}
+                                <div class="calendar-background" style="height:{{ alturaFiles }}px;"></div>
+                            {% endfor %}
                             {% for classe in llistaClasses %}
-                                {% if columna == classe['dayNumber'] %}
-                                    {% if fila == classe['startRow']+1 %}
-                                        <div class="margin-space"></div>
-                                        <div class="{{ 'class start '+classe['color']+' btn-'+classe['id']|string }}">
-                                            <div class="place">{{ classe['classroom'] }}</div>
-                                            <div class="class-time-start">{{ classe['startHourString'] }}</div>
-                                            <div class="subject-extra">
-                                                <h1 class="subject-title">{{ classe['name'] }}</h1>
-                                                    {% if classe.get("extra") %}
-                                                        <p class="extra-info">{{ classe['extra'] }}</p>
-                                                    {% endif %}
+                                {% if classe['dayNumber'] == i %}
+                                    <div class='class-out' style="top:{{ alturaFiles*classe['startRow']+40 }}px;height:{{ alturaFiles*(classe['endRow']-classe['startRow']) }}px;">
+                                        <div class="class-in {{ classe['color'] }}" id="classe-{{ classe['id'] }}">
+                                            <div class="subject-data">
+                                                <div class="place">{{ classe['classroom'] }}</div>
+                                                <div class="subject-title">{{ classe['name'] }}</div>
+                                            </div>
+                                            <div class="subject-timing">
+                                                <div class="start-hour">{{ classe['startHourString'] }}</div>
+                                                <div class="end-hour">{{ classe['endHourString'] }}</div>
                                             </div>
                                         </div>
-                                    {% elif fila > classe['startRow'] and not fila >= classe['endRow'] %}
-                                        <div class="{{ 'class mid '+classe['color']+' btn-'+classe['id']|string }}"></div>
-                                    {% elif fila == classe['endRow'] %}
-                                        <div class="{{ 'class end '+classe['color']+' btn-'+classe['id']|string }}">
-                                            <div class="class-time-end">{{ classe['endHourString'] }}</div>
-                                        </div>
-                                        <div class="margin-space"></div>
-                                    {% endif %}
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                         </td>
                     {% endfor %}
-                    </tr>
-                {% endfor %}
+                </tr>
             </table>
         </div>
-        <div class='shadow'>
-        </div>
+        <div class='shadow'></div>
         {% for classe in llistaClasses %}
-            <div id="{{ 'pop-'+classe['id']|string }}" class="{{ 'detailed-box '+classe['color']+' pop-'+classe['id']|string }}">
+            <div id="pop-{{ classe['id'] }}" class="detailed-box {{ classe['color'] }}">
                 <div class="detailed-content">
                     <div class="detailed-header">
                         <p class="detailed-place">{{ classe['classroom'] }}</p>
                         <p class="detailed-time">{{ classe['startHourString']+ " - " + classe['endHourString'] }}</p>
-                        <i class="material-icons cross">arrow_downward</i>
+                        <i class="material-icons cross">clear</i>
                     </div>
                     <div class="detailed-info">
                         <p class="detailed-name">{{ classe['name'] }}</p>
@@ -97,18 +89,15 @@
                         <p class="detailed-data">{{ classe['profe'] }}</p>
                         <p class="detailed-label">E-mail</p>
                         <p class="detailed-data">{{ classe['emailProfe'] }}</p>
+                        <p class="detailed-label">Idioma</p>
+                        <p class="detailed-data">{{ classe['lan'] }}</p>
                     </div>
                 </div>       
             </div>
             <script>
                 $(function() {
-                    $("{{ '.btn-'+classe['id']|string }}").hover(function() {
-                        $("{{ '.btn-'+classe['id']|string }}").addClass("hover-box");
-                    }, function(){
-                        $("{{ '.btn-'+classe['id']|string }}").removeClass("hover-box");
-                    });
-                    $("{{ '.btn-'+classe['id']|string }}").click(function() {
-                        $("{{ '.pop-'+classe['id']|string }}").addClass("active-box");
+                    $("#classe-{{ classe['id'] }}").click(function() {
+                        $("#pop-{{ classe['id'] }}").addClass("active-box");
                         $(".shadow").addClass("active-shadow");
                     });
                 });

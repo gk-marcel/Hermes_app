@@ -66,9 +66,9 @@ body {
     font-weight: 200;
     background-color: var(--blueColor);
     border-style: none;
-    -webkit-transition: all var(--animation_duration) var(--easingBounce);
-    -moz-transition: all var(--animation_duration) var(--easingBounce);
-    transition: all var(--animation_duration) var(--easingBounce);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
     will-change: auto;
 }
 
@@ -77,6 +77,14 @@ body {
     text-decoration: None;
     width: 60%;
     color: white;
+}
+
+.login_button:focus {
+    outline: none;
+}
+
+.login_button:active {
+    transform: scale(0.9);
 }
 
 .need-help {

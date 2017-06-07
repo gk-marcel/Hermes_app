@@ -28,11 +28,15 @@ def calendar():
     #Files necessaries del calendari
     filaMax = jsonParse.filesNecessaries(llistaClasses)
     
+    #Altura files
+    alturaFiles = 30
+    
     #Passar dades a Jinja2
     return render_template('calendar.html',
                            username=session['username'],
                            llistaClasses=llistaClasses,
-                           filaMax=filaMax)
+                           filaMax=filaMax,
+                           alturaFiles=alturaFiles)
 
 @hermes.route('/help')
 def help_page():

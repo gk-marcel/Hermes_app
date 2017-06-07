@@ -1,4 +1,4 @@
-import json
+import json, math
 
 def getJsonExample():
     with open('static/json/reduced.json', 'r') as f:
@@ -11,8 +11,8 @@ def getRows(llistaClasses):
         llistaHores.append(classe['endHour'][0]*60 + classe['endHour'][1])
     minutMinim = min(llistaHores)
     for classe in llistaClasses:
-        classe['startRow'] = (classe['startHour'][0]*60 + classe['startHour'][1] - minutMinim)/30
-        classe['endRow'] = (classe['endHour'][0]*60 + classe['endHour'][1] - minutMinim)/30
+        classe['startRow'] = (classe['startHour'][0]*60 + classe['startHour'][1] - minutMinim)/30.
+        classe['endRow'] = (classe['endHour'][0]*60 + classe['endHour'][1] - minutMinim)/30.
     return llistaClasses
 
 def filesNecessaries(llistaClasses):
@@ -22,7 +22,7 @@ def filesNecessaries(llistaClasses):
             filaMax = classe['startRow']
         if classe['endRow'] > filaMax:
             filaMax = classe['endRow']
-    return filaMax
+    return int(math.ceil(filaMax))
 
 def convertJSON(jsonFile):
     
@@ -79,6 +79,7 @@ def convertJSON(jsonFile):
                 classe['emailProfe'] = 'marc.garcia@gmail.com'
                 classe['codi'] = assignatura['code']
                 classe['id'] = identificador
+                classe['lan'] = 'ENG'
                 identificador += 1
                 
                 llistaClasses.append(classe.copy())

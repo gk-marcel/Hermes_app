@@ -119,59 +119,97 @@ body {
     width: 100%;
     height: 100%;
     overflow: scroll;
+    table-layout: fixed;
 }
-/*
+
 .day-row {
-    border-bottom: 1px solid #dbdbdb;
+    height: 40px;
 }
-*/
+
 .day-name {
     text-align: center;
-    font-size: 1em;
-    line-height: 45px;
-    color: #767676;
+    color: #8e8e8e;
+}
+
+.calendar-background:nth-child(2n) { /*hores*/
+    border-bottom: 1px solid #d0d0d0;
+    width: 70%;
+    transform: translate(22%,0);
+}
+
+.calendar-background:nth-child(2n+1) { /*mitjes hores*/
+    border-bottom: 1px solid #e3e3e3;
+    width: 50%;
+    transform: translate(50%,0);
+}
+
+.class-out {
+    position: absolute;
     width: 20%;
+    padding: 3px;
 }
 
-.hour-cell {
-    height: 32px;
-}
-
-/*.hour-row:nth-child(2n-1) {
-    border-bottom: 1px dashed #d1d1d1;
-}*/
-
-.class {
-    margin: 0 4%;
+.class-in {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    padding: 3px 6px;
     color: white;
     cursor: pointer;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+    will-change: transform;
+    border: 3px solid rgba(0, 0, 0, 0.0);
+}
+
+.class-in:hover {
+    transform: scale(0.98);
+    border: 3px solid rgba(0, 0, 0, 0.2);
+    
+}
+
+.class-in:active {
+    transform: scale(0.95);
+}
+
+.subject-data {
+    float: left;
+    height: 100%;
+    width: calc(100% - 40px);
     position: relative;
-    -webkit-transition: all var(--animation_duration) var(--easingNormal);
-    -moz-transition: all var(--animation_duration) var(--easingNormal);
-    transition: all var(--animation_duration) var(--easingNormal);
+    overflow-y: hidden;
 }
 
-.start {
-    border-radius: 7px 7px 0 0;
-    padding: 7% 7% 0 7%;
-    height: 110%;
-    position: relative;
-    z-index: 1;
-}
-
-.mid {
-    height: 110%;
-    display: block;
-}
-
-.end {
-    border-radius: 0 0 7px 7px;
-    height: 110%;
+.subject-timing {
+    height: 100%;
+    float: right;
     position: relative;
 }
 
-.margin-space {
-    height: 15px;
+.start-hour {
+    float: right;
+    position: absolute;
+    right: 0;
+}
+
+.end-hour {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+.subject-title {
+    clear: both;
+    font-family: 'Raleway';
+    font-size: 1.2em;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.place {
+    float: left;
+    /*border: 1px solid black;*/
 }
 
 .c0 {background-color: #5585e0;}
@@ -187,58 +225,6 @@ body {
 .c5 {background-color: #c954bc;}
 
 .c6 {background-color: #aec954;}
-
-.place {
-    font-size: 0.8em;
-    top: 10px;
-    left: 7%;
-    position: absolute;
-}
-
-.class-time-start {
-    font-size: 0.8em;
-    right: 7%;
-    top: 10px;
-    position: absolute;
-}
-
-.subject-extra {
-    position: absolute;
-    width: 60%;
-    top: 26px;
-    left: 7%;
-    -webkit-transition: all 0.2s var(--easingNormal);
-    -moz-transition: all 0.2s var(--easingNormal);
-    transition: all 0.2s var(--easingNormal);
-}
-
-.subject-title {
-    font-size: 1.2em;
-    font-family: Raleway;
-    font-weight: 400;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.extra-info {
-    opacity: 0.7;
-}
-
-.hover-box .subject-extra {
-    margin-top: -3px;
-    opacity: 0.5;
-}
-
-.class-time-end {
-    font-size: 0.8em;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 0 7% 9px 0;
-    overflow: visible;
-    z-index: 1;
-}
 
 .shadow {
     position: fixed;
@@ -266,9 +252,9 @@ body {
     bottom: 0;
     box-shadow: 0 0 1.6em rgba(0,0,0,0.5);
     color: white;
-    -webkit-transition: all var(--animation_duration) ease-in;
-    -moz-transition: all var(--animation_duration) ease-in;
-    transition: all var(--animation_duration) ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
     visibility: hidden;
     z-index: 3;
     transform: translate(0,100%);
