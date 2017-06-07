@@ -1,6 +1,6 @@
 #IMPORT FLASK
-from flask import Flask, request, render_template, redirect, url_for
-import hermesJSON
+from flask import Flask, session, request, render_template, redirect, url_for
+import jsonParse
 
 #App instance creation
 hermes = Flask(__name__)
@@ -11,30 +11,26 @@ hermes = Flask(__name__)
 def login():
     if request.method == 'POST':
         #FORM VALIDATION
-        username = request.form['username']
-        return redirect(url_for('calendar', username=username))
+        session['username'] = request.form['username']
+        return redirect(url_for('calendar'))
     else:
         return render_template('login.html')
 
-@hermes.route('/calendar/<username>')
-def calendar(username):
+@hermes.route('/calendar')
+def calendar():
     
-    JSONfile = hermesJSON.getJsonExample()
+    #Importacio de l'arxiu
+    JSONfile = jsonParse.getJsonExample()
     
-    #Obtinc una llista de totes les classes i amb les seves caracteristiques
-    llistaClasses = hermesJSON.convertJSON(JSONfile)
+    #Llista de totes les classes amb les seves dades
+    llistaClasses = jsonParse.convertJSON(JSONfile)
     
-    #files necessaries
-    filaMax = 0
-    for classe in llistaClasses:
-        if classe['startRow'] > filaMax:
-            filaMax = classe['startRow']
-        if classe['endRow'] > filaMax:
-            filaMax = classe['endRow']
+    #Files necessaries del calendari
+    filaMax = jsonParse.filesNecessaries(llistaClasses)
     
-    #Pass to Jinja2
+    #Passar dades a Jinja2
     return render_template('calendar.html',
-                           username=username,
+                           username=session['username'],
                            llistaClasses=llistaClasses,
                            filaMax=filaMax)
 
@@ -42,6 +38,8 @@ def calendar(username):
 def help_page():
     return render_template('help.html')
 
+# secret key
+hermes.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 
 #INIT
 if __name__=='__main__':

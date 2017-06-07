@@ -55,7 +55,7 @@ body {
 .login_button {
     display: block;
     width: 50%;
-    margin: 30px auto 0 auto;
+    margin: 13px auto 0 auto;
     text-align: center;
     line-height: 45px;
     border-radius: 25px;
@@ -96,6 +96,27 @@ body {
     opacity: 0.6;
     text-decoration: none;
     color: var(--blueColor);
+}
+
+.alerta {
+    visibility: hidden;
+    line-height: 0px;
+    opacity: 0;
+    font-size: 1.1em;
+    margin: 0;
+    margin: auto;
+    color: #db506b;
+    text-align: center;
+    -webkit-transition: all var(--animation_duration) var(--easingNormal);
+    -moz-transition: all var(--animation_duration) var(--easingNormal);
+    transition: all var(--animation_duration) var(--easingNormal);
+    will-change: auto;
+}
+
+.activa {
+    visibility: visible;
+    opacity: 1;
+    line-height: 40px;
 }
 
 @media screen and (max-width:400px) {

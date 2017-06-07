@@ -1,7 +1,7 @@
 import json
 
 def getJsonExample():
-    with open('JSONexample1.json', 'r') as f:
+    with open('static/json/reduced.json', 'r') as f:
         return json.load(f)
 
 def getRows(llistaClasses):
@@ -15,13 +15,22 @@ def getRows(llistaClasses):
         classe['endRow'] = (classe['endHour'][0]*60 + classe['endHour'][1] - minutMinim)/30
     return llistaClasses
 
-def convertJSON(JSONfile):
+def filesNecessaries(llistaClasses):
+    filaMax = 0
+    for classe in llistaClasses:
+        if classe['startRow'] > filaMax:
+            filaMax = classe['startRow']
+        if classe['endRow'] > filaMax:
+            filaMax = classe['endRow']
+    return filaMax
+
+def convertJSON(jsonFile):
     
     llistaClasses = []
     classe = {}
     dies = {u'monday':1, u'tuesday':2, u'wednesday':3, u'thursday': 4, u'friday': 5}
     
-    llistaAssignatures = JSONfile['subjects']
+    llistaAssignatures = jsonFile['subjects']
     
     #Creacio dun diccionari pels colors
     llistaNoms = []
