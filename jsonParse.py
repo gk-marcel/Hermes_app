@@ -24,15 +24,46 @@ def filesNecessaries(llistaClasses):
             filaMax = classe['endRow']
     return int(math.ceil(filaMax))
 
+def trobarCanal(canals):
+    for i in range(0,len(canals)):
+        if canals[i] == 0:
+            return i+1
+    return False
+
 def insertarSolapaments(llistaClasses):
-    for i in range(len(llistaClasses)):
-        for j in range(len(llistaClasses)):
+    files = filesNecessaries(llistaClasses)
+    for day in range(1,6):
+        canalsActius = [0,0,0,0,0]
+        #print 'day start'
+        for fila in range(0, files+1):
+            #print 'row:',fila
+            for classe in llistaClasses:
+                if classe['dayNumber'] == day:
+                    if classe['endRow']-1 == fila:
+                        canalsActius[classe['canal']-1] = 0
+                        #print classe['name'],'ENDS at',classe['endHourString']
+                        ##print 'channel state:',canalsActius
+                    elif classe['startRow'] == fila :
+                        #print classe['name'],'STARTS at',classe['startHourString']
+                        canalAssignat = trobarCanal(canalsActius)
+                        #print 'assigned to',canalAssignat
+                        classe['canal'] = canalAssignat
+                        canalsActius[canalAssignat-1] = 1
+                        #print 'channel state:',canalsActius
+    for i in range(0, len(llistaClasses)):
+        for j in range(0, len(llistaClasses)):
             if i != j:
                 if llistaClasses[i]['dayNumber'] == llistaClasses[j]['dayNumber']:
-                    if llistaClasses[j]['startRow'] > llistaClasses[i]['startRow'] and llistaClasses[j]['startRow'] < llistaClasses[i]['endRow']:
-                        llistaClasses[j]['canal'] = llistaClasses[i]['canal'] + 1
-                        llistaClasses[i]['paralel'] += 1
-                        llistaClasses[j]['paralel'] += 1
+                    if llistaClasses[i]['startRow'] >= llistaClasses[j]['startRow'] and llistaClasses[i]['startRow'] < llistaClasses[j]['endRow']:
+                        print ''
+                        print 'Colisionen:',llistaClasses[i]['name'],',',llistaClasses[i]['day'],'(',llistaClasses[i]['canal'],')'
+                        print 'amb',llistaClasses[j]['name'],',',llistaClasses[j]['day'],'(',llistaClasses[j]['canal'],')'
+                        paralel = max(llistaClasses[i]['canal'], llistaClasses[j]['canal'])
+                        print paralel
+                        if llistaClasses[i]['paralel'] < paralel:
+                            llistaClasses[i]['paralel'] = paralel
+                        if llistaClasses[j]['paralel'] < paralel:
+                            llistaClasses[j]['paralel'] = paralel
     return llistaClasses
 
 def convertJSON(jsonFile):
@@ -77,12 +108,6 @@ def convertJSON(jsonFile):
                 #COLOR DE LA CLASSE
                 classe['color'] = diccionariColors[classe['name']]
                 
-                #EXTRA
-                try:
-                    classe['extra'] = sessio['extra']
-                except KeyError:
-                    pass
-                
                 #ALTRES
                 classe['classroom'] = sessio['classroom']
                 classe['grup'] = str(numeroGrup)
@@ -97,7 +122,14 @@ def convertJSON(jsonFile):
                 classe['canal'] = 1
                 classe['paralel'] = 1
                 
-                llistaClasses.append(classe.copy())
+                #EXTRA i afegir
+                try:
+                    classe['extra'] = sessio['extra']
+                    if classe['extra'][0] == '(':
+                        llistaClasses.append(classe.copy())
+                except KeyError:
+                    classe['extra'] = ''
+                    llistaClasses.append(classe.copy())
     
     #Calcular ROWS
     llistaClasses = getRows(llistaClasses)

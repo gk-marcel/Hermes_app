@@ -179,6 +179,7 @@ body {
 .subject-data {
     float: left;
     position: relative;
+    overflow: hidden;
 }
 
 .subject-timing {
@@ -205,6 +206,12 @@ body {
     font-size: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.subject-extra {
+    opacity: 0.6;
+    font-family: 'Raleway';
+    font-size: 1em;
 }
 
 .invisible {
@@ -350,10 +357,16 @@ body {
         top: 22px;
         width: 100%;
     }
+    .subject-extra {
+        font-size: 1.1em;
+    }
 }
 
 @media screen and (max-width:900px) {
     .subject-title {
+        font-size: 1em;
+    }
+    .subject-extra {
         font-size: 1em;
     }
     .time-paralel-3 {
@@ -385,6 +398,9 @@ body {
         font-size: 0.8em;
     }
     .subject-title {
+        font-size: 0.9em;
+    }
+    .subject-extra {
         font-size: 0.9em;
     }
     .header {
