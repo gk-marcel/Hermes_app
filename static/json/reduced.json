@@ -114,6 +114,12 @@
             "startHour": "08:00:00",
             "endHour": "09:45:00",
             "classroom": "B-B.4"
+          },
+          {
+            "day": "tuesday",
+            "startHour": "14:00:00",
+            "endHour": "17:45:00",
+            "classroom": "B-B.4"
           }
         ]
       }

@@ -32,7 +32,7 @@
                 </div>
                 <a href='/' class='logOut'>
                     <p class='username'>{{ username }}</p>
-                    <img class='logOut-icon' src='/static/img/logOut.png'>
+                    <i class='material-icons blue logOut-icon' style="font-size:30px;">power_settings_new</i>
                 </a>
             </div>
         </header>
@@ -56,15 +56,17 @@
                                                                   width: {{ 20/classe['paralel'] }}%;
                                                                   transform: translateX({{ 200/classe['paralel']*(classe['canal']-1) }}%);">
                                         <div class="class-in {{ classe['color'] }}" id="classe-{{ classe['id'] }}">
-                                            <div class="subject-data">
-                                                <div class="place">{{ classe['classroom'] }}</div>
-                                                <div class="subject-title">{{ classe['name'] }}</div>
-                                                <div class="subject-title">canal: {{ classe['canal'] }}</div>
-                                                <div class="subject-title">en paralel: {{ classe['paralel'] }}</div>
+                                            <div class="subject-data" style="width:90%;height:100%;">
+                                                <div class="place place-paralel-{{ classe['paralel'] }}">{{ classe['classroom'] }}</div>
+                                                <div class="subject-title title-paralel-{{ classe['paralel'] }}">{{ classe['name'] }}</div>
+                                                {% if False %}
+                                                    <div>canal: {{ classe['canal'] }}</div>
+                                                    <div>en paralel: {{ classe['paralel'] }}</div>
+                                                {% endif %}
                                             </div>
                                             <div class="subject-timing">
-                                                <div class="start-hour">{{ classe['startHourString'] }}</div>
-                                                <div class="end-hour">{{ classe['endHourString'] }}</div>
+                                                <div class="start-hour time-paralel-{{ classe['paralel'] }}">{{ classe['startHourString'] }}</div>
+                                                <div class="end-hour time-paralel-{{ classe['paralel'] }}">{{ classe['endHourString'] }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +132,7 @@
                 var time = hours + ':' + minutes;
                 document.getElementById('current-hour').innerHTML = time;
                 setTimeout(updateClock, 5000);
-            }
+            };
             updateClock();
         </script>
 	</body>
