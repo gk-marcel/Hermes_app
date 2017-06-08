@@ -30,7 +30,7 @@
           {
             "day": "monday",
             "startHour": "16:00:00",
-            "endHour": "17:30:00",
+            "endHour": "18:30:00",
             "classroom": "H-2.5"
           },
           {
@@ -49,7 +49,7 @@
         "40": [
           {
             "day": "wednesday",
-            "startHour": "12:30:00",
+            "startHour": "09:00:00",
             "endHour": "15:30:00",
             "classroom": "B-B.3"
           },
@@ -69,8 +69,8 @@
         "50": [
           {
             "day": "tuesday",
-            "startHour": "16:00:00",
-            "endHour": "18:00:00",
+            "startHour": "09:00:00",
+            "endHour": "13:00:00",
             "classroom": "H-0.4"
           }
         ],
@@ -91,7 +91,7 @@
         "40": [
           {
             "day": "wednesday",
-            "startHour": "16:00:00",
+            "startHour": "14:00:00",
             "endHour": "18:00:00",
             "classroom": "B-B.2"
           },
@@ -126,7 +126,7 @@
           {
             "day": "monday",
             "startHour": "08:00:00",
-            "endHour": "10:00:00",
+            "endHour": "18:00:00",
             "classroom": "H-5.1"
           },
           {

@@ -51,11 +51,16 @@
                             {% endfor %}
                             {% for classe in llistaClasses %}
                                 {% if classe['dayNumber'] == i %}
-                                    <div class='class-out' style="top:{{ alturaFiles*classe['startRow']+40 }}px;height:{{ alturaFiles*(classe['endRow']-classe['startRow']) }}px;">
+                                    <div class='class-out' style="top: {{ alturaFiles*classe['startRow']+40 }}px;
+                                                                  height: {{ alturaFiles*(classe['endRow']-classe['startRow']) }}px;
+                                                                  width: {{ 20/classe['paralel'] }}%;
+                                                                  transform: translateX({{ 200/classe['paralel']*(classe['canal']-1) }}%);">
                                         <div class="class-in {{ classe['color'] }}" id="classe-{{ classe['id'] }}">
                                             <div class="subject-data">
                                                 <div class="place">{{ classe['classroom'] }}</div>
                                                 <div class="subject-title">{{ classe['name'] }}</div>
+                                                <div class="subject-title">canal: {{ classe['canal'] }}</div>
+                                                <div class="subject-title">en paralel: {{ classe['paralel'] }}</div>
                                             </div>
                                             <div class="subject-timing">
                                                 <div class="start-hour">{{ classe['startHourString'] }}</div>

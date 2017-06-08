@@ -24,6 +24,17 @@ def filesNecessaries(llistaClasses):
             filaMax = classe['endRow']
     return int(math.ceil(filaMax))
 
+def insertarSolapaments(llistaClasses):
+    for i in range(len(llistaClasses)):
+        for j in range(len(llistaClasses)):
+            if i != j:
+                if llistaClasses[i]['dayNumber'] == llistaClasses[j]['dayNumber']:
+                    if llistaClasses[j]['startRow'] > llistaClasses[i]['startRow'] and llistaClasses[j]['startRow'] < llistaClasses[i]['endRow']:
+                        llistaClasses[j]['canal'] = llistaClasses[i]['canal'] + 1
+                        llistaClasses[i]['paralel'] += 1
+                        llistaClasses[j]['paralel'] += 1
+    return llistaClasses
+
 def convertJSON(jsonFile):
     
     llistaClasses = []
@@ -82,9 +93,14 @@ def convertJSON(jsonFile):
                 classe['lan'] = 'ENG'
                 identificador += 1
                 
+                #inicialitzacio de solapament
+                classe['canal'] = 1
+                classe['paralel'] = 1
+                
                 llistaClasses.append(classe.copy())
     
     #Calcular ROWS
     llistaClasses = getRows(llistaClasses)
-    #print llistaClasses
+    #calcular solapaments
+    llistaClasses = insertarSolapaments(llistaClasses)
     return llistaClasses

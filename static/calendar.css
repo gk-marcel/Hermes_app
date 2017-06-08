@@ -145,7 +145,6 @@ body {
 
 .class-out {
     position: absolute;
-    width: 20%;
     padding: 3px;
 }
 
@@ -176,7 +175,8 @@ body {
 .subject-data {
     float: left;
     height: 100%;
-    width: calc(100% - 40px);
+    /*width: calc(100% - 40px);*/
+    width: 90%;
     position: relative;
     overflow-y: hidden;
 }
