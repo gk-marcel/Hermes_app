@@ -1,7 +1,7 @@
 import json, math
 
 def getJsonExample():
-    with open('static/json/grup10.json', 'r') as f:
+    with open('static/json/edu.json', 'r') as f:
         return json.load(f)
 
 def getRows(llistaClasses):
@@ -46,6 +46,7 @@ def insertarSolapaments(llistaClasses):
             if i != j:
                 if llistaClasses[i]['dayNumber'] == llistaClasses[j]['dayNumber']:
                     if llistaClasses[i]['startRow'] >= llistaClasses[j]['startRow'] and llistaClasses[i]['startRow'] < llistaClasses[j]['endRow']:
+                        paralel = max(llistaClasses[i]['canal'], llistaClasses[j]['canal'])
                         if llistaClasses[i]['paralel'] < paralel:
                             llistaClasses[i]['paralel'] = paralel
                         if llistaClasses[j]['paralel'] < paralel:
@@ -122,5 +123,4 @@ def convertJSON(jsonFile):
     
 	#calcular solapaments
     llistaClasses = insertarSolapaments(llistaClasses)
-    
-	return llistaClasses
+    return llistaClasses

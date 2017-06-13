@@ -220,7 +220,7 @@ body {
 
 .c1 {background-color: #44b756;}
 
-.c2 {background-color: #d9a925;}
+.c2 {background-color: #e8ca21;}
 
 .c3 {background-color: #ce4221;}
 
@@ -229,6 +229,8 @@ body {
 .c5 {background-color: #c954bc;}
 
 .c6 {background-color: #aec954;}
+
+.c7 {background-color: #faa025;}
 
 .place-paralel-3 {
     visibility: hidden;
@@ -374,10 +376,10 @@ body {
     .title-paralel-3 {
         word-wrap: break-word;
     }
-    title-paralel-4 {
+    .title-paralel-4 {
         display: none;
     }
-    time-paralel-4 {
+    .time-paralel-4 {
         display: none;
     }
 }
