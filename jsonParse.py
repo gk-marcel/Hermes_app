@@ -1,7 +1,10 @@
-import json, math
+import json, math, os
 
 def getJsonExample():
-    with open('/static/json/edu.json', 'r') as f:
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    fname = os.path.join(this_dir, 'static', 'json', 'edu.json')
+    print fname
+    with open(fname, 'r') as f:
         return json.load(f)
 
 def getRows(llistaClasses):
