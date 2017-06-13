@@ -1,7 +1,7 @@
 import json, math
 
 def getJsonExample():
-    with open('static/json/edu.json', 'r') as f:
+    with open('/static/json/edu.json', 'r') as f:
         return json.load(f)
 
 def getRows(llistaClasses):
