@@ -1,7 +1,7 @@
 import json, math
 
 def getJsonExample():
-    with open('static/json/reduced.json', 'r') as f:
+    with open('static/json/grup10.json', 'r') as f:
         return json.load(f)
 
 def getRows(llistaClasses):
@@ -18,8 +18,6 @@ def getRows(llistaClasses):
 def filesNecessaries(llistaClasses):
     filaMax = 0
     for classe in llistaClasses:
-        if classe['startRow'] > filaMax:
-            filaMax = classe['startRow']
         if classe['endRow'] > filaMax:
             filaMax = classe['endRow']
     return int(math.ceil(filaMax))
@@ -34,32 +32,20 @@ def insertarSolapaments(llistaClasses):
     files = filesNecessaries(llistaClasses)
     for day in range(1,6):
         canalsActius = [0,0,0,0,0]
-        #print 'day start'
         for fila in range(0, files+1):
-            #print 'row:',fila
             for classe in llistaClasses:
                 if classe['dayNumber'] == day:
                     if classe['endRow']-1 == fila:
                         canalsActius[classe['canal']-1] = 0
-                        #print classe['name'],'ENDS at',classe['endHourString']
-                        ##print 'channel state:',canalsActius
                     elif classe['startRow'] == fila :
-                        #print classe['name'],'STARTS at',classe['startHourString']
                         canalAssignat = trobarCanal(canalsActius)
-                        #print 'assigned to',canalAssignat
                         classe['canal'] = canalAssignat
                         canalsActius[canalAssignat-1] = 1
-                        #print 'channel state:',canalsActius
     for i in range(0, len(llistaClasses)):
         for j in range(0, len(llistaClasses)):
             if i != j:
                 if llistaClasses[i]['dayNumber'] == llistaClasses[j]['dayNumber']:
                     if llistaClasses[i]['startRow'] >= llistaClasses[j]['startRow'] and llistaClasses[i]['startRow'] < llistaClasses[j]['endRow']:
-                        print ''
-                        print 'Colisionen:',llistaClasses[i]['name'],',',llistaClasses[i]['day'],'(',llistaClasses[i]['canal'],')'
-                        print 'amb',llistaClasses[j]['name'],',',llistaClasses[j]['day'],'(',llistaClasses[j]['canal'],')'
-                        paralel = max(llistaClasses[i]['canal'], llistaClasses[j]['canal'])
-                        print paralel
                         if llistaClasses[i]['paralel'] < paralel:
                             llistaClasses[i]['paralel'] = paralel
                         if llistaClasses[j]['paralel'] < paralel:
@@ -133,6 +119,8 @@ def convertJSON(jsonFile):
     
     #Calcular ROWS
     llistaClasses = getRows(llistaClasses)
-    #calcular solapaments
+    
+	#calcular solapaments
     llistaClasses = insertarSolapaments(llistaClasses)
-    return llistaClasses
+    
+	return llistaClasses

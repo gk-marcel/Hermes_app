@@ -169,7 +169,6 @@ body {
 .class-in:hover {
     transform: scale(0.98);
     border: 3px solid rgba(0, 0, 0, 0.2);
-    
 }
 
 .class-in:active {
@@ -178,7 +177,6 @@ body {
 
 .subject-data {
     float: left;
-    position: relative;
     overflow: hidden;
 }
 
